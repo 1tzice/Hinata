@@ -15,9 +15,8 @@ let handler = async (m, { conn, isOwner, usedPrefix, command, args }) => {
 	} else if (m.quoted && m.quoted.text) {
 		text = m.quoted.text
 	} else throw query
-	let keys = global.openaikey
 	const configuration = new Configuration({
-				apiKey: keys,
+				apiKey: openaikey,
 			});
 			const openai = new OpenAIApi(configuration);
 			

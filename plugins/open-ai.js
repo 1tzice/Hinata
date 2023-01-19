@@ -18,9 +18,9 @@ let handler = async (m, { conn, isOwner, usedPrefix, command, args }) => {
   let one = urut[0]
   let two = urut[1]
   let three = urut[2]
-  let keys = global.openaikey
+  
   const configuration = new Configuration({
-				apiKey: keys,
+				apiKey: openaikey,
 			});
 			const openai = new OpenAIApi(configuration);
 			
@@ -203,7 +203,7 @@ let handler = async (m, { conn, isOwner, usedPrefix, command, args }) => {
 				max_tokens: 3000,
 				top_p: 1.0,
 				frequency_penalty: 0.0,
-				presence_penalty: 0.0,
+				presence_penalty: 0.0
 			});
 			m.reply('*Result:*' + response.data.choices[0].text + '\n\n' + '*Made by:* ' + 'OpenAi')
 		} catch (e) {

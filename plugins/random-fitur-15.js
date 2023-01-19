@@ -30,7 +30,8 @@ if (!text) return m.reply(`Example: ${usedPrefix + command} blablabla`)
 
 let res = await fetch(`https://tools.helixs.id//API/random-image?data=${text}`)
 let v = await res.json()
-await conn.sendButton(m.chat, 'Url:', v.result.getRandom(), v.result.getRandom(), [
+let gett = await(await fetch(v.result.getRandom())).buffer()
+await conn.sendButton(m.chat, 'Url:', v.result.getRandom(), gett, [
                 ['Sticker', '.s']
             ], fakes, adReply)
 }
