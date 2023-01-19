@@ -47,16 +47,7 @@ global.APIKeys = {
 /*Lolhuman*/
 global.lolkey = "zulfikarbot"
 /*OpenAi*/
-global.openaikey = pickRandom([
-"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",
-"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",
-"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",
-"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",
-"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",
-"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",
-"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",
-"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"
-])
+global.openaikey = "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"
 
 /*List Key
 -Lolhuman-
