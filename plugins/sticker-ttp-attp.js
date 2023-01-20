@@ -1,26 +1,16 @@
-let handler = async(m, { conn, text, args, usedPrefix, command }) => {
-let teks = text ? text : m.quoted && m.quoted.text ? m.quoted.text : m.text
-
-let urls = [
-'https://api.xteam.xyz/attp?file=&text=' + teks,
-'https://api.xteam.xyz/ttp?file=&text=' + teks,
-]
-            let lisn = [
-            "Xteam Attp",
-            "Xteam Ttp",
-            ]
-           
-	let listSections = []
-	Object.keys(urls, lisn).map((v, index) => {
-	listSections.push(['Result: ' + ++index, [
-          [htjava + ' ' + lisn[v] + ' Sticker', usedPrefix + 'get ' + urls[v], 'By ' + author],
-          ['Modules ', usedPrefix + 'ttps ' + teks, 'By ' + author]
-        ]])
-	})
-	return conn.sendList(m.chat, htki + ' 📺 Sticker Search 🔎 ' + htka, `⚡ Silakan pilih Sticker Search di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`, author, `☂️ Sticker Search Disini ☂️`, listSections, m)
-
+let handler = async (m, { conn, args, command }) => {
+	let text = args.join` `
+	if (m.quoted?.text) {
+		let res = await conn.getFile(API('lolhuman', `/api/${command}`, { text: m.quoted?.text }, 'apikey'))
+		if (!/webp/.test(res.ext)) throw 'An error occurred.'
+		await conn.sendMessage(m.chat, { sticker: res.data }, { quoted: m })
+	} else if (text) {
+		let res = await conn.getFile(API('lolhuman', `/api/${command}`, { text }, 'apikey'))
+		if (!/webp/.test(res.ext)) throw 'An error occurred.'
+		await conn.sendMessage(m.chat, { sticker: res.data }, { quoted: m })
+	} else throw 'Input teks'
 }
+handler.tags = ['general']
+handler.help = handler.command = ['ttp', 'attp', 'attp2']
 
-handler.command = /^a?ttp$/i
-handler.tags = ['sticker']
 export default handler

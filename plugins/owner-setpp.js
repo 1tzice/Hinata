@@ -1,23 +1,18 @@
-import uploadImage from '../lib/uploadImage.js'
+import { webp2png } from '../lib/webp2mp4.js'
 
-let handler = async (m, { conn, args, usedPrefix, command }) => {
-    let q = m.quoted ? m.quoted : m
-    let mime = (q.msg || q).mimetype || q.mediaType || ''
-    if (/image/g.test(mime) && !/webp/g.test(mime)) {
-    	let bot = conn.user.jid // Bot
-    	let img = await q.download()
-		if (!img) return m.reply(`gagal mengambil gambar`)
-		conn.updateProfilePicture (bot, img)
-		conn.reply(m.chat, 'Sukses Mengganti Foto Profile Bot!', m)
-    } else {
-    	m.reply(`Kirim gambar dengan caption *${usedPrefix + command}* atau tag gambar yang sudah dikirim`)
-    }
+let handler = async (m, { conn, args }) => {
+  let q = m.quoted ? m.quoted : m
+  let mime = (q.msg || q).mimetype || q.mediaType || ''
+  if (/image/.test(mime)) {
+    let url = await webp2png(await q.download())
+    await conn.updateProfilePicture(conn.user.jid, { url }).then(_ => m.reply('Success update profile picture'))
+  } else if (args[0] && /https?:\/\//.test(args[0])) {
+    await conn.updateProfilePicture(conn.user.jid, { url: args[0] }).then(_ => m.reply('Success update profile picture'))
+  } else throw 'Where\'s the media?'
 }
+handler.alias = ['setpp', 'setppbot']
+handler.command = /^setpp(bot)?$/i
 
-handler.menugroup = ['setpp']
-handler.tagsgroup = ['owner']
-handler.command = /^(set(pp|ppbot))$/i
-
-handler.owner = true
+handler.rowner = true
 
 export default handler

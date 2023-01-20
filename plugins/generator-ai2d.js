@@ -8,10 +8,11 @@ let q = m.quoted ? m.quoted : m
     let image = await q.download()
     let buff = await AI2D(image, {
   proxy: {
-    url: "http://27.115.36.154:9002",
+    url: "socks5://60.165.35.64:7302", //"socks5://27.184.2.115:23456/",
     chinese: true,
     image: false,
-  }
+  },// support http & socks
+crop: "SINGLE",
 })
 await conn.sendFile(m.chat, buff, '', author, m)
 }

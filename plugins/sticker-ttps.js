@@ -2,13 +2,33 @@ import Canvas from 'canvas'
 import { sticker } from '../lib/sticker.js'
 import uploadImage from '../lib/uploadImage.js'
 import fs from 'fs'
-let handler = async (m, { conn, args, text, usedPrefix, command }) => {
-	let teks = m.quoted ? m.quoted.text : text
-var files = fs.readdirSync('./src/font/')
-let chosenFile = files[Math.floor(Math.random() * files.length)]
-
-	Canvas.registerFont('./src/font/' + chosenFile, { family: chosenFile.toString() })
-	let length = teks.length
+let handler = async (m, { conn, args, usedPrefix, command }) => {
+	let text
+	if (args.length >= 1) {
+		text = args.slice(0).join(" ")
+	} else if (m.quoted && m.quoted.text) {
+		text = m.quoted.text
+	} else throw "Input Teks"
+	let urut = text.split`|`
+  let one = urut[0]
+  let two = urut[1]
+  let three = urut[2]
+  
+	var files = fs.readdirSync('./src/font/')
+	
+	if (command == "ttps") {
+	let listSections = []
+	Object.keys(files).map((v, index) => {
+	listSections.push(["Model [ " + ++index + ' ]', [
+          [files[v], usedPrefix + command + "get " + files[v] + "|" + text, "➥"]
+        ]])
+	})
+	return conn.sendList(m.chat, htki + " 📺 Models 🔎 " + htka, `⚡ Silakan pilih Model di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`, author, "☂️ M O D E L ☂️", listSections, m)
+	}
+	
+	if (command == "ttpsget") {
+	Canvas.registerFont('./src/font/' + one, { family: one.toString() })
+	let length = two.length
 		
 	var font = 90
 	if (length>12){ font = 68}
@@ -27,18 +47,20 @@ let chosenFile = files[Math.floor(Math.random() * files.length)]
 	var ttp = {}
 	ttp.create = Canvas.createCanvas(576, 576)
 	ttp.context = ttp.create.getContext('2d')
-	ttp.context.font =`${font}px ${chosenFile}`
+	ttp.context.font =`${font}px ${one}`
 	ttp.context.strokeStyle = 'black'
 	ttp.context.lineWidth = 3
 	ttp.context.textAlign = 'center'
-	ttp.context.strokeText(teks, 290,300)
+	ttp.context.strokeText(two, 290,300)
 	ttp.context.fillStyle = 'white'
-	ttp.context.fillText(teks, 290,300)
+	ttp.context.fillText(two, 290,300)
 	let img = ttp.create.toBuffer()
 	let gds = await uploadImage(img)
     let stiker = await sticker(false, gds, global.packname, global.author)
-    if (stiker) await conn.sendFile(m.chat, stiker, 'sticker.webp', '', m, null, adReply)
+    if (stiker) await conn.sendFile(m.chat, stiker, 'sticker.webp', '', m, null, adReplyS)
     }
-handler.command = /^(ttps)$/i
+}
+handler.help = ["ttps"]
+handler.command = ["ttps", "ttpsget"]
 
 export default handler

@@ -1,27 +1,20 @@
 import fetch from 'node-fetch'
-import { sizeFormatter } from 'human-readable'
-let formatSize = sizeFormatter({
-	std: 'JEDEC', decimalPlaces: 2, keepTrailingZeroes: false, render: (literal, symbol) => `${literal} ${symbol}B`
-})
 
 let handler = async (m, { conn, args }) => {
-	if (!args[0]) throw 'Input URL' 
-	GDriveDl(args[0]).then(async (res) => {
-		if (!res) throw res
-		await m.reply(JSON.stringify(res, null, 2))
-		conn.sendMessage(m.chat, { document: { url: res.downloadUrl }, fileName: res.fileName, mimetype: res.mimetype }, { quoted: m })
-	})
+	if (!args[0]) throw 'Input URL'
+	if (!args[0].match(/drive\.google/i)) throw 'Invalid URL'
+	let res = await GDriveDl(args[0])
+	await m.reply('_In progress, please wait..._')
+	await conn.sendMessage(m.chat, { document: { url: res.downloadUrl }, fileName: res.fileName, mimetype: res.mimetype }, { quoted: m })
 }
-handler.help = ['gdrive'].map(v => v + ' <url>')
+handler.help = ['gdrive']
 handler.tags = ['downloader']
-handler.command = /^gd(rive(d(own(load(er)?)?|l))?|dle|l)$/i
+handler.command = /^gdrive(dl)?$/i
 
 export default handler
 
-async function GDriveDl(url) {
-	let id
-	if (!(url && url.match(/drive\.google/i))) throw 'Invalid URL'
-	id = (url.match(/\/?id=(.+)/i) || url.match(/\/d\/(.*?)\//))[1]
+export async function GDriveDl(url) {
+	let id = (url.match(/\/?id=(.+)/i) || url.match(/\/d\/(.*?)\//))?.[1]
 	if (!id) throw 'ID Not Found'
 	let res = await fetch(`https://drive.google.com/uc?id=${id}&authuser=0&export=download`, {
 		method: 'post',
@@ -40,5 +33,9 @@ async function GDriveDl(url) {
 	if (!downloadUrl) throw 'Link Download Limit!'
 	let data = await fetch(downloadUrl)
 	if (data.status !== 200) throw data.statusText
-	return { downloadUrl, fileName, fileSize: formatSize(sizeBytes), mimetype: data.headers.get('content-type') }
+	return {
+		downloadUrl, fileName,
+		fileSize: (sizeBytes / 1024 / 1024).toFixed(2),
+		mimetype: data.headers.get('content-type')
+	}
 }

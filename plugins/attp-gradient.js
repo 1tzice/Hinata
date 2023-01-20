@@ -2,24 +2,30 @@ import { sticker } from '../lib/sticker.js'
 import fs from 'fs'
 import fetch from 'node-fetch'
 
-let handler = async(m, { conn, text, args, usedPrefix, command }) => {
+let handler = async(m, { conn, args, usedPrefix, command }) => {
 let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
 let pp = await conn.profilePictureUrl(who).catch(_ => hwaifu.getRandom())
 let name = await conn.getName(who)
-let teks = text ? text : m.quoted && m.quoted.text ? m.quoted.text : m.text
-let urls = ['https://violetics.pw/api/canvas/quotes?apikey=beta&text=' + teks + '&author=' + name,
-'https://api.lolhuman.xyz/api/attp2?apikey=' + global.lolkey + '&text=' + teks,
-'https://api.lolhuman.xyz/api/attp?apikey=' + global.lolkey + '&text=' + teks,
-'https://api.lolhuman.xyz/api/hartacustom?apikey=' + global.lolkey + '&text=' + teks,
-'https://api.lolhuman.xyz/api/ttp2?apikey=' + global.lolkey + '&text=' + teks,
-'https://api.lolhuman.xyz/api/ttp3?apikey=' + global.lolkey + '&text=' + teks,
-'https://api.lolhuman.xyz/api/ttp4?apikey=' + global.lolkey + '&text=' + teks,
-'https://api.lolhuman.xyz/api/ttp5?apikey=' + global.lolkey + '&text=' + teks,
-'https://api.lolhuman.xyz/api/ttp6?apikey=' + global.lolkey + '&text=' + teks,
-'https://api.lolhuman.xyz/api/ttp?apikey=' + global.lolkey + '&text=' + teks,
-'https://violetics.pw/api/canvas/attp-gradient2?apikey=beta&text=' + teks,
-'https://violetics.pw/api/canvas/attp-gradient?apikey=beta&text=' + teks,
-'https://violetics.pw/api/canvas/ttp-gradient?apikey=beta&text=' + teks]
+let query = "input text\nEx. .ttp naruto"
+	let text
+	if (args.length >= 1) {
+		text = args.slice(0).join(" ")
+	} else if (m.quoted && m.quoted.text) {
+		text = m.quoted.text
+	} else throw query
+let urls = ['https://violetics.pw/api/canvas/quotes?apikey=beta&text=' + text + '&author=' + name,
+'https://api.lolhuman.xyz/api/attp2?apikey=' + global.lolkey + '&text=' + text,
+'https://api.lolhuman.xyz/api/attp?apikey=' + global.lolkey + '&text=' + text,
+'https://api.lolhuman.xyz/api/hartacustom?apikey=' + global.lolkey + '&text=' + text,
+'https://api.lolhuman.xyz/api/ttp2?apikey=' + global.lolkey + '&text=' + text,
+'https://api.lolhuman.xyz/api/ttp3?apikey=' + global.lolkey + '&text=' + text,
+'https://api.lolhuman.xyz/api/ttp4?apikey=' + global.lolkey + '&text=' + text,
+'https://api.lolhuman.xyz/api/ttp5?apikey=' + global.lolkey + '&text=' + text,
+'https://api.lolhuman.xyz/api/ttp6?apikey=' + global.lolkey + '&text=' + text,
+'https://api.lolhuman.xyz/api/ttp?apikey=' + global.lolkey + '&text=' + text,
+'https://violetics.pw/api/canvas/attp-gradient2?apikey=beta&text=' + text,
+'https://violetics.pw/api/canvas/attp-gradient?apikey=beta&text=' + text,
+'https://violetics.pw/api/canvas/ttp-gradient?apikey=beta&text=' + text]
             let lisn = ["Quotes: " + urls[0].substring(8, urls[0].indexOf('/api')),
             "Attp 2: " + urls[1].substring(8, urls[1].indexOf('/api')),
             "Attp: " + urls[2].substring(8, urls[2].indexOf('/api')),
@@ -47,7 +53,6 @@ let urls = ['https://violetics.pw/api/canvas/quotes?apikey=beta&text=' + teks + 
 	}
 	return await conn.sendListM(m.chat, button, row, m)
 }
-handler.help = ['ttpg', 'attpg', 'attpg2', 'quotex', 'tahta', 'ttp1', 'ttp2', 'ttp3', 'ttp4', 'ttp5', 'ttp6', 'attp1', 'attp2', 'hartacustom'].map(v => v + ' <text>')
-handler.command = /^(hartacustom|attp(g2|[12])|quotex|attpg|t(ahta|tp[1-6g]))$/i
+handler.command = handler.help = ['ttpg', 'attpg', 'attpg2', 'quotex', 'tahta', 'ttp1', 'ttp2', 'ttp3', 'ttp4', 'ttp5', 'ttp6', 'attp1', 'attp2', 'hartacustom']
 handler.tags = ['sticker']
 export default handler
