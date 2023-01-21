@@ -23,7 +23,7 @@ let handler = async (m, { conn, text, args, usedPrefix, command }) => {
     }
 }
 
-handler.help = ['gipotion <teks>']
+handler.menu = ['gipotion <teks>']
 handler.tags = ['genshin']
 handler.command = /^(gipotions?)$/i
 

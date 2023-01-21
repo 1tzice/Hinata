@@ -188,10 +188,17 @@ let handler = async (m, { conn, isOwner, usedPrefix, command, args }) => {
 	
 	if (command == "aidalle") {
 		m.reply(wait)
+		try {
+		let res = await fetch(`https://api.lolhuman.xyz/api/dall-e?apikey=${global.lolkey}&text=${encodeURIComponent(text)}`)
+		let anu = Buffer.from(await res.arrayBuffer())
+		if (Buffer.byteLength(anu) < 22000) throw Error(`[!] Error : Buffer not found.`)
+		await conn.sendMessage(m.chat, { image: anu, caption: `Open AI Dall E :\n${text}` }, { quoted: m })
+	} catch (e) {
 		let url = "https://dalle-mini.amasad.repl.co/gen/" + text
 			await conn.sendButton(m.chat, author, "[ Input ]\n" + text, url, [
 			[emojis + " M E N U", ".menulist"]
 		], m)
+	}
 	}
 	
 	if (command == "ai") {

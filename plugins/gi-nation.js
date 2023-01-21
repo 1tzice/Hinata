@@ -18,7 +18,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     }
 }
 
-handler.help = ['gination <teks>']
+handler.menu = ['gination <teks>']
 handler.tags = ['genshin']
 handler.command = /^((gi|genshin)nations?)$/i
 

@@ -6,21 +6,18 @@ let handler = async(m, { conn, text, usedPrefix, command }) => {
 	try {
 		let anu = await fetch(`https://api.lolhuman.xyz/api/smule?apikey=${global.lolkey}&url=${text}`)
 		let json = await anu.json()
-		let ini_txt = `*[ PILIH FORMAT MEDIA ]*\n\n_${json.result.title}_\n\nKetik *${usedPrefix}smulemp3* atau *${usedPrefix}smulemp4* apabila tombol tidak muncul/berfungsi.\n`
-		conn.sendButton(m.chat, ini_txt, packname + ' - ' + author, [
-			[`🎧 Audio`, `${usedPrefix}smulemp3 ${text}`],
-			[`🎥 Video`, `${usedPrefix}smulemp4 ${text}`]
-		], m)
+		await conn.sendMessage(m.chat, { video: { url: json.result.video }, caption: json.result.title }, { quoted: m })
 	} catch (e) {
 		console.log(e)
 		m.reply(`Invalid Smule url.`)
 	}
 }
 
-handler.menu = ['smule <url>']
+handler.menu = ['smulevideo <url>']
 handler.tags = ['search']
-handler.command = /^(smule(play|search)?)$/i
+handler.command = /^(smule(mp4|video))$/i
 
+handler.premium = true
 handler.limit = true
 
 export default handler
