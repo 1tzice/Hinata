@@ -6,7 +6,7 @@ import("node-fetch").then(function({default: fetch}){
 const fakeYouToken = "187b56b2217ac09dbe6ae610f19b35dfbc53cdd5857f818f03b45d048287b4bc"
 
 let handler = async (m, { conn, isOwner, usedPrefix, command, args }) => {
-	let query = "input text\nEx. .aiworld naruto\n<command> <tex>\n\nCommand:\n-ai\n-aicute\n-aianime\n-aitextimg\n-aitextgen\n-aidiff\n-aisent\n-ai3d\n-aipunk\n-aiworld\n-aidalle\n-aimodel"
+	let query = "input text\nEx. .ttsc hello world\n<command> <tex>"
 	let text
 	if (args.length >= 1) {
 		text = args.slice(0).join(" ")
@@ -28,8 +28,8 @@ let handler = async (m, { conn, isOwner, usedPrefix, command, args }) => {
 	return conn.sendList(m.chat, htki + " 📺 Models 🔎 " + htka, `⚡ Silakan pilih Model di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`, author, "☂️ M O D E L ☂️", listSections, m)
   }
   if (command == 'ttscget') {
-  let ow = await requestSpeech(one, two)
-	await conn.sendMessage(m.chat, { audio: { url: ow }, ptt: true, mimetype: 'audio/mpeg' }, { quoted: m })
+  let res = await requestSpeech(one, two)
+  await conn.sendFile(m.chat, res, '', '', fakes, null, adReply)
   }
 }
 handler.help = ['ttsc']

@@ -3,22 +3,26 @@ import fetch from 'node-fetch'
 
 let handler = async(m, { conn, usedPrefix, text, args, command }) => {
 	if (!args[0]) throw 'Input URL'
-	await m.reply('_In progress, please wait..._')
-	try {
-	let url = /https?:\/\//.test(args[0]) ? args[0] : 'https://' + args[0],
-		// ss = /f$/i.test(command) ? API('lolhuman', '/api/sswebfull', { url }, 'apikey') : await ssweb2(url)
-		ss = await ssweb(url, /f$/i.test(command), args[1])
-	await conn.sendMessage(m.chat, { image: ss, caption: '*Result:* ' + url }, { quoted: m })
-	} catch (e) {
+	m.reply(wait)
+	let url = /https?:\/\//.test(args[0]) ? args[0] : 'https://' + args[0]
+	let st = await ssweb(url, /f$/i.test(command), args[1])
+	let ss = st
+	let ss2 = await ssweb2(url)
 	let lis = [
 'https://shot.screenshotapi.net/screenshot?token=WCCYKR0-X5CMMV0-JB4G5Z5-P6SPC8R&url=' + args[0] + '&full_page=true&fresh=true&output=image&file_type=jpg',
 'https://api.popcat.xyz/screenshot?url=' + args[0],
-'https://api.apiflash.com/v1/urltoimage?access_key=7eea5c14db5041ecb528f68062a7ab5d&wait_until=page_loaded&url=' + args[0]
+'https://api.apiflash.com/v1/urltoimage?access_key=7eea5c14db5041ecb528f68062a7ab5d&wait_until=page_loaded&url=' + args[0],
+'https://image.thum.io/get/fullpage/' + args[0],
+ss,
+ss2
 ]
 let liss = [
 'shot.screenshotapi',
 'api.popcat',
-'api.apiflash'
+'api.apiflash',
+'image.thum.io',
+'screenshotmachine.com',
+'urlbox.io'
 ]
 let row = Object.keys(lis, liss).map((v, index) => ({
 		title: 'By ' + liss[v],
@@ -31,7 +35,6 @@ let row = Object.keys(lis, liss).map((v, index) => ({
 		footerText: wm
 	}
 	return conn.sendListM(m.chat, button, row, m)
-	}
 }
 handler.help = ['ss', 'ssf']
 handler.tags = ['tools']
