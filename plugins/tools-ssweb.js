@@ -1,12 +1,13 @@
 import axios from 'axios'
 import fetch from 'node-fetch'
+import uploadImage from '../lib/uploadImage.js'
 
 let handler = async(m, { conn, usedPrefix, text, args, command }) => {
 	if (!args[0]) throw 'Input URL'
 	m.reply(wait)
 	let url = /https?:\/\//.test(args[0]) ? args[0] : 'https://' + args[0]
 	let st = await ssweb(url, /f$/i.test(command), args[1])
-	let ss = st
+	let ss = await uploadImage(st)
 	let ss2 = await ssweb2(url)
 	let lis = [
 'https://shot.screenshotapi.net/screenshot?token=WCCYKR0-X5CMMV0-JB4G5Z5-P6SPC8R&url=' + args[0] + '&full_page=true&fresh=true&output=image&file_type=jpg',
