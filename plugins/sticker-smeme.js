@@ -28,7 +28,7 @@ let [atas, bawah] = text.split`|`
       } catch (e) {
         console.error(e)
       } finally {
-    let meme = `https://api.memegen.link/images/custom/${encodeURIComponent(atas ? atas : '')}/${encodeURIComponent(bawah ? bawah : '')}.png?background=${out}`
+    let meme = `https://api.memegen.link/images/custom/${encodeURIComponent(atas ? atas : '-')}/${encodeURIComponent(bawah ? bawah : '-')}.png?background=${out}`
     stiker = await sticker(false, meme, global.packname, global.author)
     if (stiker) await conn.sendFile(m.chat, stiker, 'sticker.webp', '', m, null, adReply)
     else m.reply(`Reply Media dengan perintah\n\n${usedPrefix + command} <${atas ? atas : 'teks atas'}>|<${bawah ? bawah : 'teks bawah'}>`)

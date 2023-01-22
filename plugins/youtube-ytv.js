@@ -47,7 +47,7 @@ try {
   if (!isLimit) await conn.sendButton(m.chat, `*${htki} YOUTUBE ${htka}*
 
 *${htjava} Title:* ${title}
-*${htjava} Filesize:* ${video.fileSizeH}`, title + '.mp4', await(await fetch(link)).buffer(), [['🎀 Menu', '/menu']], m, adReplyS)
+*${htjava} Filesize:* ${video.fileSizeH}`, title + '.mp4', await(await fetch(link)).buffer(), [["🎥 G E T", usedPrefix + 'get ' + link], ["🎶 Search", usedPrefix + 'yts ' + text]], m, adReplyS)
   } catch (e) {
 let res = await axios('https://violetics.pw/api/downloader/youtube?apikey=beta&url=' + text)
 let json = res.data
