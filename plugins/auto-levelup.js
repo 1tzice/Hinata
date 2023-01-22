@@ -1,7 +1,7 @@
 import { canLevelUp, xpRange } from '../lib/levelling.js'
 import { levelup } from '../lib/canvas.js'
 
-export async function before(m, { conn }) {
+export async function before(m) {
     let user = global.db.data.users[m.sender]
     if (!user.autolevelup)
         return !0
@@ -16,8 +16,8 @@ Kurang *${max - user.exp}* lagi! ✨
     let before = user.level * 1
     while (canLevelUp(user.level, user.exp, global.multiplier)) user.level++
     if (before !== user.level) {
-        let teks = `Selamat ${conn.getName(m.sender)} naik 🧬level\n.             ${user.role}`
-        let str = `${conn.getName(m.sender)} naik 🧬level\n.             ${user.role}
+        let teks = `Selamat ${this.getName(m.sender)} naik 🧬level\n.             ${user.role}`
+        let str = `${this.getName(m.sender)} naik 🧬level\n.             ${user.role}
 
 *🎉 C O N G R A T S 🎉*
 *${before}* ➔ *${user.level}* [ *${user.role}* ]
@@ -35,9 +35,9 @@ Kurang *${max - user.exp}* lagi! ✨
   let data = image.toBuffer();
             try {
             let img = await levelup(teks, user.level)
-            conn.sendButton(m.chat, str, botdate, img, [['INVENTORY', '.inv']], m)
+            this.sendButton(m.chat, str, botdate, img, [['INVENTORY', '.inv']], m)
             } catch (e) {
-            conn.sendButton(m.chat, str, botdate, data, [['INVENTORY', '.inv']], m)
+            this.sendButton(m.chat, str, botdate, data, [['INVENTORY', '.inv']], m)
             }
 
     }

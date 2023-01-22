@@ -17,10 +17,10 @@ if (m.isBaileys && m.fromMe)
     let urs = 'https://api.tiodevhost.my.id/api/soundoftext?text=' + res.success + '&lang=id-ID'
     let so = await fetch(urs)
     let un = await so.json()
-        conn.sendMessage(m.chat, { audio: { url: un.result }, mimetype: 'audio/mp4' })
+        this.sendMessage(m.chat, { audio: { url: un.result }, mimetype: 'audio/mp4' })
         } catch (e) {
         let tss = await tts(res.success, 'id')
-        await conn.sendFile(m.chat, tss, '', '', fakes, null, adReply)
+        await this.sendFile(m.chat, tss, '', '', fakes, null, adReply)
         }
     }
 }

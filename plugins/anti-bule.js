@@ -1,6 +1,6 @@
 
 export async function before(m, { isAdmin, isBotAdmin }) {
-    let name = await conn.getName(m.sender)
+    let name = await this.getName(m.sender)
     let chat = global.db.data.chats[m.chat]
     let user = global.db.data.users[m.sender]
     let caption = `👋 Anti Bule ${name} @${m.sender.split("@")[0]}, Thanks!`.trim()
@@ -8,7 +8,7 @@ export async function before(m, { isAdmin, isBotAdmin }) {
    if (!m.sender.startsWith('62' || '1')) {
    	user.banned = true
    	this.sendButton(m.chat, caption, author, null, [['Disable Anti Bule', '.off antibule']], m, { mentions: this.parseMention(caption) })
-   	return conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
+   	return this.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
    }
   }
  }

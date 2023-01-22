@@ -1,9 +1,9 @@
 import fs from 'fs'
 import fetch from 'node-fetch'
-let handler  = async (m, { conn, usedPrefix: _p }) => {
+let handler  = async (m, { usedPrefix }) => {
 let info = ` 📚 *Wa'alaikumsalam*`
-await conn.send2ButtonDoc(m.chat, `${htki} ᴜ s ᴇ ʀ s ${htka}`, info, 'ℹ️ Sapa', '.tts id Waalaikumsalam', 'ℹ️ Menu', '.menu', fakes, adReply)
-await conn.sendMessage(m.chat, {
+await this.send2ButtonDoc(m.chat, `${htki} ᴜ s ᴇ ʀ s ${htka}`, info, 'ℹ️ Sapa', usedPrefix + 'tts id Waalaikumsalam', 'ℹ️ Menu', usedPrefix + 'menu', fakes, adReply)
+await this.sendMessage(m.chat, {
           react: {
             text: '🙏',
             key: m.key,

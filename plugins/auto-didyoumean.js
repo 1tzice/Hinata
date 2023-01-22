@@ -1,6 +1,6 @@
 import didyoumean from 'didyoumean'
 import similarity from 'similarity'
-export async function before(m, { match, usedPrefix, command }) {
+export async function before(m, { match, usedPrefix }) {
 	if ((usedPrefix = (match[0] || '')[0])) {
 		let noPrefix = m.text.replace(usedPrefix, '')
 		let args = noPrefix.trim().split` `.slice(1)
@@ -8,8 +8,8 @@ export async function before(m, { match, usedPrefix, command }) {
 	if (help.includes(noPrefix)) return
 		let mean = didyoumean(noPrefix, help)
 		let sim = similarity(noPrefix, mean)
-		let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
-		let name = await conn.getName(who)
+		let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? this.user.jid : m.sender
+		let name = await this.getName(who)
 		let caption = `👋 Hai ${name} @${who.split("@")[0]},\nApakah yang kamu maksud:\n*${usedPrefix + mean}*\nSimilarity: *${Number(sim * 100).toFixed(2)}%*`
 		/* Button List Section */
 		let spas = "                "
