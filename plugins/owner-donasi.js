@@ -13,7 +13,19 @@ Want Support Bot?
 
 Setelah melakukan donasi kirim bukti pembayaran ke owner
 `
-await conn.sendPayment(m.chat, fsizedoc, 'USD', str, '0@s.whatsapp.net', logo, m)
+await conn.relayMessage(m.chat,  {
+    requestPaymentMessage: {
+      currencyCodeIso4217: 'USD',
+      amount1000: fsizedoc,
+      requestFrom: '0@s.whatsapp.net',
+      noteMessage: {
+      extendedTextMessage: {
+      text: str,
+      contextInfo: {
+      mentionedJid: [m.sender],
+      externalAdReply: {
+      showAdAttribution: true
+      }}}}}}, {})
 }
 handler.help = ['donasi']
 handler.tags = ['info']

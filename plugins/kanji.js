@@ -28,7 +28,19 @@ let pesan = `*Result :*`
 		pesan += `grade : ${grade}, stroke : ${stroke_count}, JLPT : ${jlpt}\n`
 		pesan += `${cmenuf}`
 	}
-	await conn.sendPayment(m.chat, fsizedoc, 'USD', pesan, m.sender, await conn.resize(logo, 300, 150), m)
+	await conn.relayMessage(m.chat,  {
+    requestPaymentMessage: {
+      currencyCodeIso4217: 'USD',
+      amount1000: fsizedoc,
+      requestFrom: '0@s.whatsapp.net',
+      noteMessage: {
+      extendedTextMessage: {
+      text: pesan,
+      contextInfo: {
+      mentionedJid: [m.sender],
+      externalAdReply: {
+      showAdAttribution: true
+      }}}}}}, {})
     }
   if (args[0] == 'words') {
   let res = await fetch('https://kanjiapi.dev/v1/' + args[0] + '/' + encodeURIComponent(tes))
@@ -57,7 +69,19 @@ let pesan = `*Result :*`
 		pesan += `Name Kanji : ${name_kanji}\n`
 		pesan += `${cmenuf}`
 	}
-	await conn.sendPayment(m.chat, fsizedoc, 'USD', pesan, '0@s.whatsapp.net', logo, m)
+	await conn.relayMessage(m.chat,  {
+    requestPaymentMessage: {
+      currencyCodeIso4217: 'USD',
+      amount1000: fsizedoc,
+      requestFrom: '0@s.whatsapp.net',
+      noteMessage: {
+      extendedTextMessage: {
+      text: pesan,
+      contextInfo: {
+      mentionedJid: [m.sender],
+      externalAdReply: {
+      showAdAttribution: true
+      }}}}}}, {})
     }
 }
 handler.help = ['kanji'].map(v => v + ' <kanji>')

@@ -149,7 +149,19 @@ ${readMore}
 *${htjava} ɴᴏᴅᴇJS ᴍᴇᴍᴏʀʏ ᴜsᴀɢᴇ*
 ${'```' + Object.keys(used).map((key, _, arr) => `${key.padEnd(Math.max(...arr.map(v => v.length)), ' ')}: ${format(used[key])}`).join('\n') + '```'}
 `
-await conn.sendPayment(m.chat, `${Math.round(neww - old)}`, 'USD', str, '0@s.whatsapp.net', logo, m)
+await conn.relayMessage(m.chat,  {
+    requestPaymentMessage: {
+      currencyCodeIso4217: 'USD',
+      amount1000: `${Math.round(neww - old)}`,
+      requestFrom: '0@s.whatsapp.net',
+      noteMessage: {
+      extendedTextMessage: {
+      text: str,
+      contextInfo: {
+      mentionedJid: [m.sender],
+      externalAdReply: {
+      showAdAttribution: true
+      }}}}}}, {})
 }
 handler.help = ['ping', 'speed']
 handler.tags = ['info', 'tools']
