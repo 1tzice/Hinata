@@ -47,7 +47,7 @@ global.APIKeys = {
 /*Lolhuman*/
 global.lolkey = "zulfikarbot"
 /*OpenAi*/
-global.openaikey = "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"
+global.openaikey = "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"
 
 /*List Key
 -Lolhuman-
