@@ -56,10 +56,15 @@ let handler = async (m, { conn, isOwner, usedPrefix, command, args }) => {
 			});
 			m.reply('*Result:*' + resp.data.choices[0].text + '\n\n' + '*Made by:* ' + 'OpenAi')
 		} catch (e) {
-			let op = await fetch(global.API('lolhuman', '/api/openai', { text: text }, 'apikey'))
-			let ai = await op.json()
-			if (!ai.result) throw eror
+			try {
+			let ai = await(await fetch(global.API('lolhuman', '/api/openai', { text: text }, 'apikey'))).json()
+			if (!ai) throw eror
 			m.reply('*Result:*\n' + ai.result + '\n\n' + '*Made by:* ' + global.API('lolhuman'))
+			} catch (e) {
+			let res = await(await fetch('https://mfarels.my.id/api/openai?text=' + text)).json()
+  if (!res) throw eror
+  m.reply('*Result:*\n' + res.result + '\n\n' + '*Made by:* mfarels.my.id')
+  }
 		}
 	}
 }

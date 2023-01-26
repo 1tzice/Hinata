@@ -10,10 +10,10 @@ let name = await conn.getName(who)
 	let row = Object.values(res).map((v, index) => ({
 		title: index + ' ' + v.title,
 		description: '\n*title:* ' + v.title + '\n*developer:* ' + v.developer + '\n*score:* ' + v.score + '\n*scoreText:* ' + v.scoreText + '\n*priceText:* ' + v.priceText + '\n*appId:* ' + v.appId + '\n*summary:* ' + v.summary + '\n*url:* ' + v.url + '\n*icon:* ' + v.icon + '\n*free:* ' + v.free,
-		rowId: usedPrefix + 'get ' + v.icon
+		rowId: usedPrefix + 'apkdl ' + v.url
 	}))
 	let button = {
-		buttonText: `☂️ ${command} Search Disini ☂️`,
+		buttonText: '☂️ Result Disini ☂️',
 		description: `⚡ Hai ${name}, Silakan pilih ${command} Search di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`,
 		footerText: wm
 	}
