@@ -80,16 +80,16 @@ let handler = async (m, {
         var ttp = {}
         ttp.create = Canvas.createCanvas(576, 576)
         ttp.context = ttp.create.getContext("2d")
-        ttp.context.font = `${font}px ${one}`
+        ttp.context.font = font + "px " + one
         ttp.context.strokeStyle = "black"
         ttp.context.lineWidth = 3
         ttp.context.textAlign = "center"
         ttp.context.strokeText(two, 290, 300)
         ttp.context.fillStyle = "white"
         ttp.context.fillText(two, 290, 300)
-        let img = ttp.create.toBuffer()
-        let gds = await uploadImage(img)
-        let stiker = await sticker(false, gds, global.packname, global.author)
+        let buff = ttp.create.toBuffer()
+        let img = await uploadImage(buff)
+        let stiker = await sticker(false, img, global.packname, global.author)
         if (stiker) await conn.sendFile(m.chat, stiker, "sticker.webp", "", m, null, adReplyS)
     }
 }
