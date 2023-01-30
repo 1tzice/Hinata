@@ -841,6 +841,8 @@ throw blum
 }
 
 }
-handler.command = /^scr(ap(e[rs]?)?|p)$/i
+handler.tags = ["tools"]
+handler.help = ["scrap <args> |query"]
+handler.command = ["scrap"]
 
 export default handler

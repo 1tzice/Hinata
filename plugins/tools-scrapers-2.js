@@ -11,7 +11,7 @@ let pp = await conn.profilePictureUrl(who).catch(_ => hwaifu.getRandom())
 let name = await conn.getName(who)
 
 if (!args[0]) {
-let hasil = (['jagokata',
+let hasil = ['jagokata',
 'RandomCerpen',
 'emoji',
 'stickerSearch',
@@ -44,7 +44,7 @@ let hasil = (['jagokata',
 'zodiakHar',
 'Shoope',
 'pinterest',
-'TiktokDown']).map(v => v.toLowerCase())
+'TiktokDown']
 
 	let row = Object.keys(hasil).map((v, index) => ({
 		title: 'Scraper ' + hasil[v],
@@ -65,212 +65,213 @@ let urut = text.split`|`
   let two = urut[2]
   let three = urut[3]
 
-if (args[0] == "FaktaUnik").toLowerCase() {
+if (args[0] == "FaktaUnik") {
 if (!one) throw kueri
 let teks = await FaktaUnik(one)
 throw teks
 }
 
-if (args[0] == "FilmApik23").toLowerCase() {
+if (args[0] == "FilmApik23") {
 if (!one) throw kueri
 let teks = await FilmApik23(one)
 throw teks
 }
 
-if (args[0] == "GSMArena").toLowerCase() {
+if (args[0] == "GSMArena") {
 if (!one) throw kueri
 let teks = await GSMArena(one)
 throw teks
 }
 
-if (args[0] == "Gempa").toLowerCase() {
+if (args[0] == "Gempa") {
 if (!one) throw kueri
 let teks = await Gempa(one)
 throw teks
 }
 
-if (args[0] == "Liriklagu").toLowerCase() {
+if (args[0] == "Liriklagu") {
 if (!one) throw kueri
 let teks = await Liriklagu(one)
 throw teks
 }
 
-if (args[0] == "ManggaToon").toLowerCase() {
+if (args[0] == "ManggaToon") {
 if (!one) throw kueri
 let teks = await ManggaToon(one)
 throw teks
 }
 
-if (args[0] == "Otakudesu").toLowerCase() {
+if (args[0] == "Otakudesu") {
 if (!one) throw kueri
 let teks = await Otakudesu(one)
 throw teks
 }
 
-if (args[0] == "Pantun").toLowerCase() {
+if (args[0] == "Pantun") {
 if (!one) throw kueri
 let teks = await Pantun(one)
 throw teks
 }
 
-if (args[0] == "RamalJadian").toLowerCase() {
+if (args[0] == "RamalJadian") {
 if (!one) throw kueri
 let teks = await RamalJadian(one)
 throw teks
 }
 
-if (args[0] == "RandomCerpen").toLowerCase() {
+if (args[0] == "RandomCerpen") {
 if (!one) throw kueri
 let teks = await RandomCerpen(one)
 throw teks
 }
 
-if (args[0] == "ReverseVid").toLowerCase() {
+if (args[0] == "ReverseVid") {
 if (!one) throw kueri
 let teks = await ReverseVid(one)
 throw teks
 }
 
-if (args[0] == "SearchFilm").toLowerCase() {
+if (args[0] == "SearchFilm") {
 if (!one) throw kueri
 let teks = await SearchFilm(one)
 throw teks
 }
 
-if (args[0] == "Shoope").toLowerCase() {
+if (args[0] == "Shoope") {
 if (!one) throw kueri
 let teks = await Shoope(one)
 throw teks
 }
 
-if (args[0] == "SpeedVid").toLowerCase() {
+if (args[0] == "SpeedVid") {
 if (!one) throw kueri
 let teks = await SpeedVid(one)
 throw teks
 }
 
-if (args[0] == "TiktokDown").toLowerCase() {
+if (args[0] == "TiktokDown") {
 if (!one) throw kueri
 let teks = await TiktokDown(one)
 throw teks
 }
 
-if (args[0] == "TiktokDownloader").toLowerCase() {
+if (args[0] == "TiktokDownloader") {
 if (!one) throw kueri
 let teks = await TiktokDownloader(one)
 throw teks
 }
 
-if (args[0] == "ToVid").toLowerCase() {
+if (args[0] == "ToVid") {
 if (!one) throw kueri
 let teks = await ToVid(one)
 throw teks
 }
 
-if (args[0] == "cnn").toLowerCase() {
+if (args[0] == "cnn") {
 if (!one) throw kueri
 let teks = await cnn(one)
 throw teks
 }
 
-if (args[0] == "corona").toLowerCase() {
+if (args[0] == "corona") {
 if (!one) throw kueri
 let teks = await corona(one)
 throw teks
 }
 
-if (args[0] == "cuaca").toLowerCase() {
+if (args[0] == "cuaca") {
 if (!one) throw kueri
 let teks = await cuaca(one)
 throw teks
 }
 
-if (args[0] == "emoji").toLowerCase() {
+if (args[0] == "emoji") {
 if (!one) throw kueri
 let teks = await emoji(one)
 throw teks
 }
 
-if (args[0] == "fbDownloader").toLowerCase() {
+if (args[0] == "fbDownloader") {
 if (!one) throw kueri
 let teks = await fbDownloader(one)
 throw teks
 }
 
-if (args[0] == "igDownloader").toLowerCase() {
+if (args[0] == "igDownloader") {
 if (!one) throw kueri
 let teks = await igDownloader(one)
 throw teks
 }
 
-if (args[0] == "infoFilm123").toLowerCase() {
+if (args[0] == "infoFilm123") {
 if (!one) throw kueri
 let teks = await infoFilm123(one)
 throw teks
 }
 
-if (args[0] == "jagokata").toLowerCase() {
+if (args[0] == "jagokata") {
 if (!one) throw kueri
 let teks = await jagokata(one)
 throw teks
 }
 
-if (args[0] == "photoManipulation").toLowerCase() {
+if (args[0] == "photoManipulation") {
 if (!one) throw kueri
 let teks = await photoManipulation(one)
 throw teks
 }
 
-if (args[0] == "pinterest").toLowerCase() {
+if (args[0] == "pinterest") {
 if (!one) throw kueri
 let teks = await pinterest(one)
 throw teks
 }
 
-if (args[0] == "ssstik_io").toLowerCase() {
+if (args[0] == "ssstik_io") {
 if (!one) throw kueri
 let teks = await ssstik_io(one)
 throw teks
 }
 
-if (args[0] == "stickerSearch").toLowerCase() {
+if (args[0] == "stickerSearch") {
 if (!one) throw kueri
 let teks = await stickerSearch(one)
 throw teks
 }
 
-if (args[0] == "trutdare").toLowerCase() {
+if (args[0] == "trutdare") {
 if (!one) throw kueri
 let teks = await trutdare(one)
 throw teks
 }
 
-if (args[0] == "uploadFile").toLowerCase() {
+if (args[0] == "uploadFile") {
 if (!one) throw kueri
 let teks = await uploadFile(one)
 throw teks
 }
 
-if (args[0] == "wikipedia").toLowerCase() {
+if (args[0] == "wikipedia") {
 if (!one) throw kueri
 let teks = await wikipedia(one)
 throw teks
 }
 
-if (args[0] == "zodiakHar").toLowerCase() {
+if (args[0] == "zodiakHar") {
 if (!one) throw kueri
 let teks = await zodiakHar(one)
 throw teks
 }
 
-if (args[0] == "zodiakMing").toLowerCase() {
+if (args[0] == "zodiakMing") {
 if (!one) throw kueri
 let teks = await zodiakMing(one)
 throw teks
 }
 
 }
-handler.help = ["scrap2"]
+handler.tags = ["tools"]
+handler.help = ["scrap2 <args> |query"]
 handler.command = ["scrap2"]
 export default handler
 

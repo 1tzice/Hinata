@@ -62,8 +62,10 @@ let urut = text.split`|`
   throw res.result.articles[0]
   }
   
-  }
-handler.command = ['tsc']
+}
+handler.tags = ["tools"]
+handler.help = ["scrap1 <args> |query"]
+handler.command = ["scrap1"]
 
 export default handler
 /*
