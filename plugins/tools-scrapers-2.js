@@ -1,12 +1,9 @@
 import axios from 'axios'
-import cheerio from'cheerio'
+import cheerio from 'cheerio'
 import fs from 'fs'
 import { spawn, exec } from "child_process"
 import FormData from "form-data"
 import got from"got"
-const print = (message) => {
-	return console.log(message)
-}
 
 let handler = async (m, { text, args, usedPrefix, command }) => {
 let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
@@ -273,7 +270,8 @@ throw teks
 }
 
 }
-handler.command = handler.help = ["scraper2"]
+handler.help = ["scrap2"]
+handler.command = ["scrap2"]
 export default handler
 
 async function ManggaToon(judul) {
@@ -313,7 +311,7 @@ async function ManggaToon(judul) {
 		}
 		return hasil
 	}
-		} catch (err) {
+		} catch (e) {
 			return `Not Found 404`
 		}
 }
@@ -405,7 +403,7 @@ async function RandomCerpen() {
 		}
 	}
 	return data
-} catch (err) {
+} catch (e) {
 	const res404 = {
 		status: 500,
 		author: 'RA BOT',
@@ -691,7 +689,7 @@ async function infoFilm123(url) {
 		hastag: tag
 	}
 	return result
-} catch (err) {
+} catch (e) {
 	return `Judul tidak ditemukan`
 }
 } 
@@ -738,7 +736,7 @@ async function Otakudesu(querry) {
 		}
 	}
 	return data
-} catch (err) {
+} catch (e) {
 	var notFond = {
 		author: 'Ra bot',
 		status: link.status,
@@ -770,7 +768,7 @@ async function wikipedia(querry) {
 	}
 	return data
 }
-	} catch (err) {
+	} catch (e) {
 		var notFond = {
 			author: 'Ra bot',
 			status: link.status,
@@ -796,7 +794,7 @@ async function corona(negara) {
 		}
 	}
 	return data
-} catch (err) {
+} catch (e) {
 	var notFond = {
 		author: 'Ra bot',
 		status: link.status,
@@ -901,7 +899,7 @@ async function cuaca(wilayah) {
 		})
 	})
 	return hasil
-} catch (err) {
+} catch (e) {
 	var notFond = {
 		author: 'Ra bot',
 		status: link.status,
@@ -950,7 +948,7 @@ async function FilmApik23(querry) {
 		}
 	}
 	return data
-} catch (err) {
+} catch (e) {
 	var notFond = {
 		author: 'Ra bot',
 		status: link.status,
@@ -1108,7 +1106,7 @@ async function Gempa() {
 		})
 	})
 	return hasil
-} catch (err) {
+} catch (e) {
 	var notFond = {
 		author: 'Ra bot',
 		status: link.status,
@@ -1144,7 +1142,7 @@ async function cnn() {
 		})
 	})
 	return hasil
-} catch (err) {
+} catch (e) {
 	var notFond = {
 		author: 'Ra bot',
 		status: link.status,
